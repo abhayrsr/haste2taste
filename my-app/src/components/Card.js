@@ -12,11 +12,13 @@ export default function Card() {
           </p>
           <div className='container w-100'>
             <select className="m-2 h-100 bg-danger bg-gradient rounded">
-              {Array.from(Array(6), (e, i) => {
-                return(
-                  <option key={i+1} value={i+1}> {i+1} </option>
+              {Array.from({length: 6}, (e,i) =>{
+                return (
+                  <option key={i+1} value={i+1}>{i+1}</option>
                 )
-              })}
+              })
+
+              }
             </select>
 
             <select className="m-2 h-100 bg-danger bg-gradient rounded">
