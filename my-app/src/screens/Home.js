@@ -17,6 +17,15 @@ export default function Home() {
         <Card/>
       </div>
       <div>
+        <Card/>
+      </div>
+      <div>
+        <Card/>
+      </div>
+      <div>
+        <Card/>
+      </div>
+      <div>
         <Footer />
       </div>
     </div>

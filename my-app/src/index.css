@@ -15,4 +15,6 @@ code {
 
 #carousel{
   max-height: 700px;
+  max-width: auto;
 }
+
