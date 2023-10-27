@@ -1,31 +1,39 @@
 const express = require("express");
-const router = express.Router();
 const user = require("../models/user");
-const { body, validationResult} = require('express-validator');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-router.post("/createuser",[
-    body('email').isEmail(),
-    body('name', 'Incorrect username').isLength({ min: 5 }),
-    body('password', 'Incorrect password').isLength({ min: 5 })
-] , async (req, res) => {
+const router = express.Router();
+const { body, validationResult } = require("express-validator");
 
+router.post(
+  "/createuser",
+  [
+    body("email").isEmail(),
+    body("name", "Incorrect username").isLength({ min: 5 }),
+    body("password", "Incorrect password").isLength({ min: 5 }),
+  ],
+  async (req, res) => {
     const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-  try {
-    await user.create({
+    const salt = await bcrypt.genSalt(10);
+    let secPassword = await bcrypt.hash(req.body.password, salt);
+
+    try {
+      await user.create({
         name: req.body.name,
-        password: req.body.password,
+        password: secPassword,
         email: req.body.email,
         location: req.body.location,
-    });
-    res.json({ success: true });
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false });
+      });
+      res.json({ success: true });
+    } catch (error) {
+      res.json({ success: false });
+    }
   }
-});
+);
 
 module.exports = router;
