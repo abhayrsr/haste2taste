@@ -9,10 +9,16 @@ const mongoDB = async () => {
     console.log("connected");
     const fetchData = await mongoose.connection.db.collection("food_items");
     fetchData
-      .find()
+      .find({})
       .toArray()
       .then((data) => {
-        console.log();
+        const foodCategory = mongoose.connection.db.collection("food_category");
+        foodCategory.find({}).toArray().then((catData) => {
+          global.food_items = data;
+          global.food_category = catData;
+        }).catch((error) => {
+          console.log("Error while fetching data:", error);
+        })
       })
       .catch((error) => {
         console.log("Error while fetching data:", error);
