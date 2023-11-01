@@ -1,6 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("x")
+    localStorage.removeItem("authToken");
+    navigate("/api/loginuser");
+  }
   return (
     <div>
       <div>
@@ -21,22 +27,57 @@ export default function Navbar() {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
+              <ul className="navbar-nav me-auto mb-2">
                 <li>
-                <Link className="nav-link active" aria-current="page" to="/">
-                  Home
-                </Link>
+                  <Link
+                    className="nav-link active fs-5"
+                    aria-current="page"
+                    to="/"
+                  >
+                    Home
+                  </Link>
                 </li>
-                <li>
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-                </li>
-                <li>
-                <Link className="nav-link" to="/api/createuser">
-                  SignUp
-                </Link>
-                </li>
+                {localStorage.getItem("authToken") ? (
+                  <li>
+                    <Link
+                      className="nav-link active fs-5"
+                      aria-current="page"
+                      to="/"
+                    >
+                      My Orders
+                    </Link>
+                  </li>
+                ) : (
+                  ""
+                )}
+              </ul>
+
+              <div className="d-flex">
+                {!localStorage.getItem("authToken") ? (
+                  <div>
+                    <Link
+                      className="btn bg-white text-success mx-1"
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      className="btn bg-white text-success mx-1"
+                      to="/api/createuser"
+                    >
+                      SignUp
+                    </Link>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="btn bg-white text-success mx-2">
+                        My Cart
+                    </div>
+                    <div className="btn bg-white text-success mx-2" onClick={handleLogout}>
+                        Logout
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

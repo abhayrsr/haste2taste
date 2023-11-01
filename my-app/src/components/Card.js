@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function Card() {
+export default function Card(props) {
+  let options = props.options;
+  let priceOptions = Object.keys(options);
+  console.log(priceOptions)
   return (
     <div>
       <div
@@ -8,13 +11,13 @@ export default function Card() {
         style={{ width: "18rem", maxHeight: "360px", marginLeft:"1rem" }}
       >
         <img
-          src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={props.imgSrc}
           className="card-img-top"
-          alt="pizza"
+          alt="img"
+          style={{height:"180px", objectFit:"fill"}}
         />
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">This is some imp text</p>
+          <h5 className="card-title">{props.foodName}</h5>
           <div className="container w-100">
             <select className="m-2 h-100 bg-danger bg-gradient rounded">
               {Array.from({ length: 6 }, (e, i) => {
@@ -27,11 +30,16 @@ export default function Card() {
             </select>
 
             <select className="m-2 h-100 bg-danger bg-gradient rounded">
-              <option value="half">Half</option>
-              <option value="full">Full</option>
+              {
+                priceOptions.map((data) => {
+                  return <option key={data} value={data}>{data}</option>
+                })
+              }
             </select>
 
-            <div className="d-inline h-100 fs-5">Total Price</div>
+            <div className="d-inline h-100 fs-5">
+              Total Price
+            </div>
           </div>
         </div>
       </div>

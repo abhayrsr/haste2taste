@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -36,6 +37,9 @@ export default function Login() {
   };
   return (
     <div className="container">
+      <div className="full-width-conatiner">
+        <Navbar />
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
