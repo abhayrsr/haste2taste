@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 export default function Navbar() {
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -57,7 +58,7 @@ export default function Navbar() {
                   <div>
                     <Link
                       className="btn bg-white text-success mx-1"
-                      to="/login"
+                      to="/api/loginuser"
                     >
                       Login
                     </Link>
