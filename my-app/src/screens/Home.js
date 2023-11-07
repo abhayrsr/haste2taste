@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
-import Carousel from "../components/Carousel";
 
 export default function Home() {
   const [foodCat, setFoodCat] = useState([]);
@@ -128,9 +127,9 @@ export default function Home() {
                           >
                             {" "}
                             <Card
-                              foodName={filterItems.name}
+                              foodItem={filterItems}
                               options={filterItems.options[0]}
-                              imgSrc={filterItems.img}
+                              
                             />{" "}
                           </div>
                         );
