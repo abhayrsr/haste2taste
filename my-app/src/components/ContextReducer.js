@@ -17,6 +17,20 @@ const reducer = (state, action) => {
           img: action.img,
         },
       ];
+    case "REMOVE":
+      let newArr = [...state]
+      console.log(action.index)
+      newArr.splice(action.index, 1)
+      return newArr;
+    case "UPDATE":
+      let arr = [...state]
+      arr.find((food, index) => {
+        if(food.id === action.id){
+          arr[index] = {...food, quantity: parseInt(action.quantity) + food.quantity, price: action.price + food.price}
+        }
+        return arr;
+      })
+      return arr;
     default:
       console.log("error in reducer");
   }

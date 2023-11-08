@@ -24,4 +24,6 @@ code {
   margin: 0;
   width: 100%;
 }
-
+#row:hover {
+  color: white; 
+}
