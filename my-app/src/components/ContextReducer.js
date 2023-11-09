@@ -15,7 +15,7 @@ const reducer = (state, action) => {
           size: action.size,
           price: action.price,
           img: action.img,
-        },
+        }
       ];
     case "REMOVE":
       let newArr = [...state]
@@ -31,6 +31,9 @@ const reducer = (state, action) => {
         return arr;
       })
       return arr;
+    case "DROP":
+      let empArray = []
+      return empArray
     default:
       console.log("error in reducer");
   }
